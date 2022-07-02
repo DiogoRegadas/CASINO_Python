@@ -17,5 +17,3 @@ def a_function(first, last, age):
 checkAge = a_function(Firstname, Lastname, Age)
 
 print(checkAge)
-
-
