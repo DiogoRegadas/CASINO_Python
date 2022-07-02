@@ -14,8 +14,8 @@ def a_function(first, last, age):
         return result
 
 
-eu = a_function(Firstname, Lastname, Age)
+checkAge = a_function(Firstname, Lastname, Age)
 
-print(eu)
+print(checkAge)
 
 
