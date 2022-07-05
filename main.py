@@ -49,8 +49,8 @@ def e_function(result):
         c_function()
         global selectmenu
         selectmenu = 1  # var selectmenu equals 1 (main menu)
-        choose = input("Choose : ")
-        return choose
+        option = OptionValidation_function(selectmenu)
+        return option
     else:  # If b_function result equals False then initial c_function
         d_function()  # exit
 
@@ -61,8 +61,10 @@ def f_function(choose):
             g_function()  # initial design Insert Coin menu
             global selectmenu
             selectmenu = 2  # var selectmenu equals 2 (Insert Coin menu)
-            choose = input("Choose : ")
-            return menu_function(selectmenu, choose)  # returns function to user input "choose" do the respective
+            option = OptionValidation_function(selectmenu)
+            print(option)
+            return menu_function(selectmenu, option)
+            # returns function to user input "choose" do the respective
             #                                           menu functions
         case '2':
             return print("Gambling")  # Check Option Choose by the user and return the respective function
@@ -148,6 +150,21 @@ def age_function():
         except ValueError:
             print("Age must be a number, try again")
     return val
+
+
+def OptionValidation_function(selectedmenu):
+    if selectedmenu == 1:
+        while True:
+            option = input("Choose : ")
+            try:
+                val = int(option)
+                if val in (1, 2, 3, 4, 5):
+                    break
+                else:
+                    print("Option can't be negative, try again")
+            except ValueError:
+                print("Option must be a number, try again")
+        return str(val)
 
 
 AgeVerify = age_function()
