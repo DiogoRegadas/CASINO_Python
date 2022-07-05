@@ -1,6 +1,5 @@
 Firstname = input("Firstname : ")  # Firstname user
 Lastname = input("Lastname : ")  # Lastname user
-Age = int(input("Age : "))  # Age user
 y = "YES"  # var y represents YES
 n = "NO"  # var n represents
 selectmenu: int = 1  # Menu selection
@@ -50,7 +49,7 @@ def e_function(result):
         c_function()
         global selectmenu
         selectmenu = 1  # var selectmenu equals 1 (main menu)
-        choose = int(input("Choose : "))
+        choose = input("Choose : ")
         return choose
     else:  # If b_function result equals False then initial c_function
         d_function()  # exit
@@ -87,6 +86,7 @@ def g_function():  # Insert Coin Menu design
     print("100 Coins - Press 3")
     print("Back - Press 4")
     print(" ")
+    print("-----------------------")
     print("-----------------------")
 
 
@@ -136,7 +136,23 @@ def h_function():  # View My Coins Menu design
     print("-----------------------")
 
 
-resultA = a_function(Firstname, Lastname, Age)  # Check Age
+def age_function():
+    while True:
+        age = input("Age : ")
+        try:
+            val = int(age)
+            if val >= 0:
+                break
+            else:
+                print("Age can't be negative, try again")
+        except ValueError:
+            print("Age must be a number, try again")
+    return val
+
+
+AgeVerify = age_function()
+
+resultA = a_function(Firstname, Lastname, AgeVerify)  # Check Age
 
 resultB = b_function(resultA.upper(), y)  # Check if user want to continue
 
