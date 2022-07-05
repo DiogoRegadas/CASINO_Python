@@ -8,10 +8,10 @@ selectmenu: int = 1  # Menu selection
 
 def a_function(first, last, age):
     if 18 > age:  # if age lower then 18
-        print("Hi, ", first, last, ", comeback when you have 18")
+        print("Hi, ", first.capitalize(), last.capitalize(), ", comeback when you have 18")
         d_function()
     else:  # if age higher then 18
-        print("Hi, ", first, last, ", do you like to continue ?")
+        print("Hi, ", first.capitalize(), last.capitalize(), ", do you like to continue ?")
         result = input("Yes or No ? : ")  # if you want to leave or stay
 
         while result.upper() != y and result.upper() != n:  # if input result not equals yes or no, repeat input
@@ -50,8 +50,8 @@ def e_function(result):
         c_function()
         global selectmenu
         selectmenu = 1  # var selectmenu equals 1 (main menu)
-        choose = input("Choose : ")
-        return choose  # return option choose by user (1, 2, 3 or 4)
+        choose = int(input("Choose : "))
+        return choose
     else:  # If b_function result equals False then initial c_function
         d_function()  # exit
 
@@ -68,7 +68,11 @@ def f_function(choose):
         case '2':
             return print("Gambling")  # Check Option Choose by the user and return the respective function
         case '3':
-            return print("Coins")  # Check Option Choose by the user and return the respective function
+            h_function()  # initial design Insert Coin menu
+            selectmenu = 4  # var selectmenu equals 2 (Insert Coin menu)
+            choose = input("Choose : ")
+            return menu_function(selectmenu, choose)  # returns function to user input "choose" do the respective
+            #                                           menu functions
         case '4':
             return d_function()  # exit
 
@@ -107,6 +111,10 @@ def menu_function(selectedmenu, choose):
                 return print("Coins")  # Check Option Choose by the user and return the respective function
             case '4':
                 return backToMain()  # Back to main menu
+    elif selectedmenu == 4:
+        match choose:  # Check Option Choose by the user and return the respective function
+            case '1':
+                return backToMain()  # Back to main menu
 
 
 def backToMain():  # Back to main menu
@@ -115,6 +123,17 @@ def backToMain():  # Back to main menu
     selectmenu = 1  # Assign selectmenu equals 2 (Insert Coin menu)
     choose = input("Choose : ")
     return f_function(choose)  # returns f_function to user input "choose" do main menu functions
+
+
+def h_function():  # View My Coins Menu design
+    print("-----------------------")
+    print(" CASINO - My Coins     ")
+    print("-----------------------")
+    print(" ")
+    print("My coins - ")
+    print("Back - Press 1")
+    print(" ")
+    print("-----------------------")
 
 
 resultA = a_function(Firstname, Lastname, Age)  # Check Age
