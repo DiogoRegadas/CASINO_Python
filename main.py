@@ -62,7 +62,6 @@ def f_function(choose):
             global selectmenu
             selectmenu = 2  # var selectmenu equals 2 (Insert Coin menu)
             option = OptionValidation_function(selectmenu)
-            print(option)
             return menu_function(selectmenu, option)
             # returns function to user input "choose" do the respective
             #                                           menu functions
@@ -71,8 +70,9 @@ def f_function(choose):
         case '3':
             h_function()  # initial design Insert Coin menu
             selectmenu = 4  # var selectmenu equals 2 (Insert Coin menu)
-            choose = input("Choose : ")
-            return menu_function(selectmenu, choose)  # returns function to user input "choose" do the respective
+            option = OptionValidation_function(selectmenu)
+            return menu_function(selectmenu, option)
+            # returns function to user input "choose" do the respective
             #                                           menu functions
         case '4':
             return d_function()  # exit
@@ -123,8 +123,8 @@ def backToMain():  # Back to main menu
     c_function()  # Recreate main menu
     global selectmenu
     selectmenu = 1  # Assign selectmenu equals 2 (Insert Coin menu)
-    choose = input("Choose : ")
-    return f_function(choose)  # returns f_function to user input "choose" do main menu functions
+    option = OptionValidation_function(selectmenu)
+    return f_function(option)  # returns f_function to user input "choose" do main menu functions
 
 
 def h_function():  # View My Coins Menu design
@@ -138,36 +138,48 @@ def h_function():  # View My Coins Menu design
     print("-----------------------")
 
 
-def age_function():
+def age_function():  # Validation Age Input
     while True:
         age = input("Age : ")
         try:
-            val = int(age)
-            if val >= 0:
-                break
+            val = int(age)  # Transform Input to INTEGER, to do the validation
+            if val >= 0:  # If option is above 0
+                break  # Goes directly to the return
             else:
-                print("Age can't be negative, try again")
-        except ValueError:
-            print("Age must be a number, try again")
+                print("Age can't be negative, try again")  # input is a negative number
+        except ValueError:  # If input is not a INTEGER
+            print("Age must be a number, try again")  # input is not a number
     return val
 
 
-def OptionValidation_function(selectedmenu):
-    if selectedmenu == 1:
+def OptionValidation_function(selectedmenu):  # Validation Options Inputs
+    if selectedmenu in (1, 2):  # Validation Input in first menu and second menu because is the same number of option
         while True:
             option = input("Choose : ")
             try:
-                val = int(option)
-                if val in (1, 2, 3, 4, 5):
-                    break
+                val = int(option)  # Transform Input to INTEGER, to do the validation
+                if val in (1, 2, 3, 4):  # If option is inside 1, 2, 3, 4 (Options Available)
+                    break  # Goes directly to the return
                 else:
-                    print("Option can't be negative, try again")
-            except ValueError:
-                print("Option must be a number, try again")
-        return str(val)
+                    print("Option need to be 1, 2, 3 or 4, try again")  # input is not inside the list of options
+            except ValueError:  # If input is not a INTEGER
+                print("Option must be a number inside 1, 2, 3 or 4, try again")  # input is not a number
+        return str(val)  # Returns STRING because we are working in other functions this value in string
+    elif selectedmenu == 4:  # Validation Input in fourth menu , only one option available
+        while True:
+            option = input("Choose : ")
+            try:
+                val = int(option)  # Transform Input to INTEGER, to do the validation
+                if val == 1:  # If option is 1 (Only Option Available)
+                    break  # Goes directly to the return
+                else:
+                    print("The only option available is 1, try again")  # input is not inside the list of options
+            except ValueError:  # If input is not a INTEGER
+                print("Option must be the number 1, try again")  # input is not a number
+        return str(val)  # Returns STRING because we are working in other functions this value in string
 
 
-AgeVerify = age_function()
+AgeVerify = age_function()  # Validation Input Age
 
 resultA = a_function(Firstname, Lastname, AgeVerify)  # Check Age
 
