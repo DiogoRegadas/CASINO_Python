@@ -40,7 +40,9 @@ def c_function():  # Main Menu design
 
 
 def d_function():  # Exit program function
-    print("See you next time")
+    first = Firstname
+    last = Lastname
+    print("See you next time", '\033[1m' + first.capitalize(), last.capitalize() + '\033[0m')
     exit()
 
 
