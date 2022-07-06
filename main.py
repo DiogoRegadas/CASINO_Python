@@ -7,10 +7,10 @@ selectmenu: int = 1  # Menu selection
 
 def a_function(first, last, age):
     if 18 > age:  # if age lower then 18
-        print("Hi, ", first.capitalize(), last.capitalize(), ", comeback when you have 18")
+        print("Hi, ", '\033[1m' + first.capitalize(), last.capitalize() + '\033[0m'", comeback when you have 18")
         d_function()
     else:  # if age higher then 18
-        print("Hi, ", first.capitalize(), last.capitalize(), ", do you like to continue ?")
+        print("Hi, ", '\033[1m' + first.capitalize(), last.capitalize() + '\033[0m'", do you like to continue ?")
         result = input("Yes or No ? : ")  # if you want to leave or stay
 
         while result.upper() != y and result.upper() != n:  # if input result not equals yes or no, repeat input
