@@ -1,3 +1,5 @@
+import os.path
+
 Firstname = input("Firstname : ")  # Firstname user
 Lastname = input("Lastname : ")  # Lastname user
 y = "YES"  # var y represents YES
@@ -51,6 +53,12 @@ def e_function(result):
         c_function()
         global selectmenu
         selectmenu = 1  # var selectmenu equals 1 (main menu)
+        if os.path.isfile('teste.txt'):
+            print("File exist")
+        else:
+            f = open("teste.txt", "w")
+            f.write("0")
+
         option = OptionValidation_function(selectmenu)
         return option
     else:  # If b_function result equals False then initial c_function
@@ -98,6 +106,7 @@ def menu_function(selectedmenu, choose):
     if selectedmenu == 2:  # Check what menu was entered
         match choose:  # Check Option Choose by the user and return the respective function
             case '1':
+                AddCoins_function(choose)
                 return print("Gambling")  # Check Option Choose by the user and return the respective function
             case '2':
                 return print("Gambling")  # Check Option Choose by the user and return the respective function
@@ -134,7 +143,8 @@ def h_function():  # View My Coins Menu design
     print(" CASINO - My Coins     ")
     print("-----------------------")
     print(" ")
-    print("My coins - ")
+    f = open("teste.txt", "r")
+    print("My coins - ", f.read())
     print("Back - Press 1")
     print(" ")
     print("-----------------------")
@@ -179,6 +189,20 @@ def OptionValidation_function(selectedmenu):  # Validation Options Inputs
             except ValueError:  # If input is not a INTEGER
                 print("Option must be the number 1, try again")  # input is not a number
         return str(val)  # Returns STRING because we are working in other functions this value in string
+
+
+def AddCoins_function(option):
+    match option:  # Check Option Choose by the user and return the respective function
+        case '1':
+            w = open("teste.txt", "r")
+            myc = w.read()
+            f = open("teste.txt", "w")
+            eu = str(myc) + str(10000)
+            f.write(eu)
+        case '2':
+            return print("Gambling")  # Check Option Choose by the user and return the respective function
+        case '3':
+            return print("Coins")  # Check Option Choose by the user and return the respective function
 
 
 AgeVerify = age_function()  # Validation Input Age
