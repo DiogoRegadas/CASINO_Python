@@ -78,7 +78,9 @@ def f_function(choose):
         case '2':
             return print("Gambling")  # Check Option Choose by the user and return the respective function
         case '3':
-            h_function()  # initial design Insert Coin menu
+            h = open("teste.txt", "r")
+            print(h.read())
+            h_function(h.read())  # initial design Insert Coin menu
             selectmenu = 4  # var selectmenu equals 2 (Insert Coin menu)
             option = OptionValidation_function(selectmenu)
             return menu_function(selectmenu, option)
@@ -106,8 +108,7 @@ def menu_function(selectedmenu, choose):
     if selectedmenu == 2:  # Check what menu was entered
         match choose:  # Check Option Choose by the user and return the respective function
             case '1':
-                AddCoins_function(choose)
-                return print("Gambling")  # Check Option Choose by the user and return the respective function
+                AddCoins_function(choose)  # Check Option Choose by the user and return the respective function
             case '2':
                 return print("Gambling")  # Check Option Choose by the user and return the respective function
             case '3':
@@ -138,13 +139,13 @@ def backToMain():  # Back to main menu
     return f_function(option)  # returns f_function to user input "choose" do main menu functions
 
 
-def h_function():  # View My Coins Menu design
+def h_function(coins):  # View My Coins Menu design
+    print(coins)
     print("-----------------------")
-    print(" CASINO - My Coins     ")
+    print("   CASINO - My Coins   ")
     print("-----------------------")
     print(" ")
-    f = open("teste.txt", "r")
-    print("My coins - ", f.read())
+    print("My coins - ", coins)
     print("Back - Press 1")
     print(" ")
     print("-----------------------")
@@ -196,9 +197,12 @@ def AddCoins_function(option):
         case '1':
             w = open("teste.txt", "r")
             myc = w.read()
+            print(myc)
             f = open("teste.txt", "w")
-            eu = str(myc) + str(10000)
+            eu = str(int(myc) + int(10000))
+            print(eu)
             f.write(eu)
+            return backToMain()
         case '2':
             return print("Gambling")  # Check Option Choose by the user and return the respective function
         case '3':
