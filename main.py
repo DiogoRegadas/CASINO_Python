@@ -5,6 +5,7 @@ Lastname = input("Lastname : ")  # Lastname user
 y = "YES"  # var y represents YES
 n = "NO"  # var n represents
 selectmenu: int = 1  # Menu selection
+Mycoins: int = 0
 
 
 def a_function(first, last, age):
@@ -45,6 +46,9 @@ def d_function():  # Exit program function
     first = Firstname
     last = Lastname
     print("See you next time", '\033[1m' + first.capitalize(), last.capitalize() + '\033[0m')
+    global Mycoins
+    f = open("teste.txt", "w")
+    f.write(str(Mycoins))
     exit()
 
 
@@ -54,7 +58,9 @@ def e_function(result):
         global selectmenu
         selectmenu = 1  # var selectmenu equals 1 (main menu)
         if os.path.isfile('teste.txt'):
-            print("File exist")
+            f = open("teste.txt", "r")
+            global Mycoins
+            Mycoins = f.read()
         else:
             f = open("teste.txt", "w")
             f.write("0")
@@ -78,13 +84,10 @@ def f_function(choose):
         case '2':
             return print("Gambling")  # Check Option Choose by the user and return the respective function
         case '3':
-            h = open("teste.txt", "r")
-            print(h.read())
-            h_function(h.read())  # initial design Insert Coin menu
+            h_function()  # initial design Insert Coin menu
             selectmenu = 4  # var selectmenu equals 2 (Insert Coin menu)
             option = OptionValidation_function(selectmenu)
-            return menu_function(selectmenu, option)
-            # returns function to user input "choose" do the respective
+            return menu_function(selectmenu, option)  # returns function to user input "choose" do the respective
             #                                           menu functions
         case '4':
             return d_function()  # exit
@@ -110,9 +113,9 @@ def menu_function(selectedmenu, choose):
             case '1':
                 AddCoins_function(choose)  # Check Option Choose by the user and return the respective function
             case '2':
-                return print("Gambling")  # Check Option Choose by the user and return the respective function
+                AddCoins_function(choose)  # Check Option Choose by the user and return the respective function
             case '3':
-                return print("Coins")  # Check Option Choose by the user and return the respective function
+                AddCoins_function(choose)  # Check Option Choose by the user and return the respective function
             case '4':
                 return backToMain()  # Back to main menu
     elif selectedmenu == 3:
@@ -139,13 +142,13 @@ def backToMain():  # Back to main menu
     return f_function(option)  # returns f_function to user input "choose" do main menu functions
 
 
-def h_function(coins):  # View My Coins Menu design
-    print(coins)
+def h_function():  # View My Coins Menu design
     print("-----------------------")
     print("   CASINO - My Coins   ")
     print("-----------------------")
     print(" ")
-    print("My coins - ", coins)
+    global Mycoins
+    print("My coins - ", Mycoins)
     print("Back - Press 1")
     print(" ")
     print("-----------------------")
@@ -193,20 +196,20 @@ def OptionValidation_function(selectedmenu):  # Validation Options Inputs
 
 
 def AddCoins_function(option):
+    global Mycoins
     match option:  # Check Option Choose by the user and return the respective function
         case '1':
-            w = open("teste.txt", "r")
-            myc = w.read()
-            print(myc)
-            f = open("teste.txt", "w")
-            eu = str(int(myc) + int(10000))
-            print(eu)
-            f.write(eu)
+            Mycoins = int(Mycoins) + int(10000)
+            print(Mycoins)
             return backToMain()
         case '2':
-            return print("Gambling")  # Check Option Choose by the user and return the respective function
+            Mycoins = int(Mycoins) + int(1000)
+            print(Mycoins)
+            return backToMain()  # Check Option Choose by the user and return the respective function
         case '3':
-            return print("Coins")  # Check Option Choose by the user and return the respective function
+            Mycoins = int(Mycoins) + int(100)
+            print(Mycoins)
+            return backToMain()  # Check Option Choose by the user and return the respective function
 
 
 AgeVerify = age_function()  # Validation Input Age
