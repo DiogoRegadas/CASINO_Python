@@ -1,4 +1,5 @@
 import os.path
+import re
 
 Firstname = input("Firstname : ")  # Firstname user
 Lastname = input("Lastname : ")  # Lastname user
@@ -6,6 +7,9 @@ y = "YES"  # var y represents YES
 n = "NO"  # var n represents
 selectmenu: int = 1  # Menu selection
 Mycoins: int = 0
+coin1: str = "10000 Coins - Press 1"
+coin2: str = "1000 Coins - Press 2"
+coin3: str = "100 Coins - Press 3"
 
 
 def a_function(first, last, age):
@@ -94,13 +98,14 @@ def f_function(choose):
 
 
 def g_function():  # Insert Coin Menu design
+    global coin1, coin2, coin3
     print("-----------------------")
     print(" CASINO - Insert Coin  ")
     print("-----------------------")
     print(" ")
-    print("10000 Coins - Press 1")
-    print("1000 Coins - Press 2")
-    print("100 Coins - Press 3")
+    print(coin1)
+    print(coin2)
+    print(coin3)
     print("Back - Press 4")
     print(" ")
     print("-----------------------")
@@ -196,20 +201,24 @@ def OptionValidation_function(selectedmenu):  # Validation Options Inputs
 
 
 def AddCoins_function(option):
-    global Mycoins
+    global Mycoins, coin1, coin2, coin3
     match option:  # Check Option Choose by the user and return the respective function
         case '1':
-            Mycoins = int(Mycoins) + int(10000)
-            print(Mycoins)
+            value = getInt_function(coin1)
+            Mycoins = int(Mycoins) + value
             return backToMain()
         case '2':
-            Mycoins = int(Mycoins) + int(1000)
-            print(Mycoins)
-            return backToMain()  # Check Option Choose by the user and return the respective function
+            value = getInt_function(coin2)
+            Mycoins = int(Mycoins) + value
+            return backToMain()
         case '3':
-            Mycoins = int(Mycoins) + int(100)
-            print(Mycoins)
-            return backToMain()  # Check Option Choose by the user and return the respective function
+            value = getInt_function(coin3)
+            Mycoins = int(Mycoins) + value
+            return backToMain()
+
+
+def getInt_function(value):
+    return int(re.search(r'\d+', value).group())
 
 
 AgeVerify = age_function()  # Validation Input Age
