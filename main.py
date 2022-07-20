@@ -1,15 +1,6 @@
 import os.path
 import re
-
-Firstname = input("Firstname : ")  # Firstname user
-Lastname = input("Lastname : ")  # Lastname user
-y = "YES"  # var y represents YES
-n = "NO"  # var n represents
-selectmenu: int = 1  # Menu selection
-Mycoins: int = 0
-coin1: str = "10000 Coins - Press 1"
-coin2: str = "1000 Coins - Press 2"
-coin3: str = "100 Coins - Press 3"
+import pyodbc
 
 
 def a_function(first, last, age):
@@ -51,8 +42,9 @@ def d_function():  # Exit program function
     last = Lastname
     print("See you next time", '\033[1m' + first.capitalize(), last.capitalize() + '\033[0m')
     global Mycoins
-    f = open("teste.txt", "w")
-    f.write(str(Mycoins))
+    sql2 = f"UPDATE t_coins SET coins = '{Mycoins}' WHERE id = 1;"
+    cursor.execute(sql2)
+    cursor.commit()
     exit()
 
 
@@ -148,11 +140,11 @@ def backToMain():  # Back to main menu
 
 
 def h_function():  # View My Coins Menu design
+    global Mycoins
     print("-----------------------")
     print("   CASINO - My Coins   ")
     print("-----------------------")
     print(" ")
-    global Mycoins
     print("My coins - ", Mycoins)
     print("Back - Press 1")
     print(" ")
@@ -219,6 +211,32 @@ def AddCoins_function(option):
 
 def getInt_function(value):
     return int(re.search(r'\d+', value).group())
+
+
+def getDataSql_function():
+    comando = "SELECT coins FROM t_coins"
+    cursor.execute(comando)
+    sql = cursor.fetchone()
+    int(getInt_function(str(sql)))
+    return int(getInt_function(str(sql)))
+
+Firstname = input("Firstname : ")  # Firstname user
+Lastname = input("Lastname : ")  # Lastname user
+y = "YES"  # var y represents YES
+n = "NO"  # var n represents
+selectmenu: int = 1  # Menu selection
+coin1: str = "10000 Coins - Press 1"
+coin2: str = "1000 Coins - Press 2"
+coin3: str = "100 Coins - Press 3"
+dados_conexao = (
+    "Driver={SQL Server};"
+    "Server=DESKTOP-J6T9HAV\SQLEXPRESS;"
+    "Database=teste;"
+)
+conexao = pyodbc.connect(dados_conexao)
+cursor = conexao.cursor()
+
+Mycoins = getDataSql_function()
 
 
 AgeVerify = age_function()  # Validation Input Age
